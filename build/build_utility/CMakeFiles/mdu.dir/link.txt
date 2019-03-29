@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x -pthread -O3 -DNDEBUG  -rdynamic CMakeFiles/mdu.dir/root/test/monitor_daemon/daemon/utility.cpp.o  -o mdu -lboost_system -lboost_filesystem -lcurses -lform 

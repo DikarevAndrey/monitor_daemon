@@ -13,13 +13,12 @@ using namespace boost::filesystem;
 #define LOG_FILE_EXTENSION ".log"
 
 static void show_usage( std::string name ) {
-  std::cout << "Usage: " << name << " [-l | --live] [cpu | memory | sda]\n"
+  std::cout << "Usage: " << name << " [-l | --live] [cpu | memory | net]\n"
   << "Options:\n"
   << "\t-h,--help\tShow this help message\n"
   << "\t-l,--live\tShow real time statistics\n"
   << "\tcpu\t\tShow cpu statistics\n"
   << "\tmemory\t\tShow memo`ry statistics\n"
-  << "\tsda\t\tShow sda statistics\n"
   << "\tnet\t\tShow net statistics"
   << std::endl;
 } 
@@ -93,10 +92,6 @@ void show_live_data( std::string type1, std::string type2 = "no", std::string ty
       for( auto line : data ) {
         printw( "%s\n", line.c_str() );
       }
-      data = get_stats( "sda" );
-      for( auto line : data ) {
-        printw( "%s\n", line.c_str() );
-      }
       data = get_stats( "net" );
       for( auto line : data ) {
         printw( "%s\n", line.c_str() );
@@ -141,10 +136,6 @@ void show_data( std::string type = "all" ) {
     for( auto line : data ) {
       std::cout << line << std::endl;
     }
-    data = get_stats( "sda" );
-    for( auto line : data ) {
-      std::cout << line << std::endl;
-    }
     data = get_stats( "net" );
     for( auto line : data ) {
       std::cout << line << std::endl;
@@ -160,7 +151,6 @@ void show_data( std::string type = "all" ) {
 bool is_valid_param( char const *argv ) {
   if( strcmp( argv, "cpu" ) == 0 ||
       strcmp( argv, "memory") == 0 ||
-      strcmp( argv, "sda") == 0 ||
       strcmp( argv, "net") == 0 ) {
     return true;
   } else {
